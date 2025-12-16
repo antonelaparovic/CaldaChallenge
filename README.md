@@ -6,8 +6,8 @@
 2. [Tech Stack](#tech-stack)  
 3. [Prerequisites](#prerequisites)  
 4. [Installation](#installation)  
-5. [Configuration](#configuration)  
-6. [Running Locally](#running-locally)
+5. [Running Locally](#running-locally)
+6. [Running on Cloud/Production](#running-on-cloudproduction)
 
 ---
 
