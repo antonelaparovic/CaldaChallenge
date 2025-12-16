@@ -86,4 +86,27 @@ ng serve
 
 Open http://localhost:4200
 
+## Running on Cloud/Production
+
+The Supabase backend is already deployed and fully configured in the cloud.
+
+### Accessing the Cloud Supabase Project
+
+Use the credentials provided in the submission email to log into:
+
+https://supabase.com/dashboard
+
+### Running Angular to test cloud backend
+
+```
+cd calda-challenge-frontend
+ng serve --c production
+```
+
+The app will automatically connect to the cloud Supabase backend.
+
+Open:
+
+http://localhost:4200
+
 
