@@ -1,0 +1,93 @@
+<div class="card">
+    <h2>Create Order</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <label class="field">
+            <span>Recipient name</span>
+            <input type="text" formControlName="recipient_name" placeholder="Full name" />
+        </label>
+
+        <label class="field">
+            <span>Shipping address</span>
+            <input type="text" formControlName="shipping_address" placeholder="Street, City" />
+        </label>
+
+        <div class="section-title-row">
+            <h3>Items</h3>
+            <button type="button" class="btn secondary" (click)="addItemRow()">+ Add item</button>
+        </div>
+
+        <div class="items">
+            <div class="items-row" *ngFor="let itemGroup of itemsControls.controls; let i = index"
+                [formGroup]="itemGroup">
+                <label class="field inline">
+                    <span>Item</span>
+                    <select formControlName="item_id">
+                        <option [ngValue]="null">Select item...</option>
+                        <option *ngFor="let it of itemsCatalog" [ngValue]="it.id">
+                            {{ it.name }} - €{{ it.price }} (stock: {{ it.stock }})
+                        </option>
+                    </select>
+                </label>
+
+                <label class="field inline">
+                    <span>Quantity</span>
+                    <input type="number" min="1" formControlName="quantity" />
+                </label>
+
+                <button type="button" class="icon-btn" title="Remove" (click)="removeItemRow(i)"
+                    [disabled]="itemsControls.length === 1">
+                    ✕
+                </button>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn primary" type="submit" [disabled]="loading || form.invalid">
+                {{ loading ? "Creating..." : "Create order" }}
+            </button>
+        </div>
+    </form>
+
+    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <h3 class="section-title">Order history</h3>
+
+    <div class="muted" *ngIf="loadingHistory">Loading history...</div>
+
+    <div class="history" *ngIf="!loadingHistory && history.length > 0; else emptyHistory">
+        <div class="history-card" *ngFor="let o of history">
+            <div class="history-header">
+                <div>
+                    <div class="small">
+                        Order #{{ o.id }} - {{ o.created_at | date : "short" }}
+                    </div>
+                    <div class="bold">{{ o.recipient_name }}</div>
+                    <div class="small">{{ o.shipping_address }}</div>
+                </div>
+
+                <div class="right">
+                    <div class="status">{{ o.status }}</div>
+                    <div class="total">€{{ o.total_amount ?? 0 }}</div>
+                </div>
+            </div>
+
+            <div class="items-list">
+                <div class="item-row" *ngFor="let it of o.items">
+                    <div class="item-left">
+                        <span class="bold">
+                            {{ it.name ?? getItemLabel(it.item_id) }}
+                        </span>
+                        <span class="small">€{{ it.unit_price ?? 0 }}</span>
+                    </div>
+                    <div class="item-right">x{{ it.quantity }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #emptyHistory>
+        <div class="empty">No orders yet.</div>
+    </ng-template>
+</div>
