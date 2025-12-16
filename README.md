@@ -58,21 +58,24 @@ npm install
 
 ---
 
-## Configuration
-
-open .env.example file in backend folder, enter valid url and key, rename file to .env (check if ignored for git)
-
----
-
 ## Running locally
+Docker Desktop must be opened in the background
 
 ### Backend
 ```
 cd supabase
 npx supabase start
 ```
+After succesfull running the backend, CLI will print something like
+```
+Studio URL: http://localhost:54323
+API URL: http://localhost:54321
+DB: postgres://postgres:postgres@localhost:54322/postgres
+```
+Open Supabase Studio from url.
 
 ### Reset database & run migrations
+In terminal, run
 ```
 npx supabase db reset
 ```
@@ -85,6 +88,14 @@ ng serve
 ```
 
 Open http://localhost:4200
+
+Sign up with new user, with email antonelaparovic@gmail.com (or use prefered email).
+
+In Supabase Studio (previously opened), open SQL Editor, paste and run code from orders_seed.sql (if you signed up with different email, change script accordingly)
+
+Go back to UI and you will see your orders!
+
+---
 
 ## Running on Cloud/Production
 
@@ -108,5 +119,11 @@ The app will automatically connect to the cloud Supabase backend.
 Open:
 
 http://localhost:4200
+
+Sign up with prefered email address (you will have to confirm login via that email!)
+
+If not seeing items in dropdown, email is still not confirmed.
+
+Successfully created orders can be seen in the previously opened Cloud Dashboard.
 
 
