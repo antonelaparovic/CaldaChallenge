@@ -46,7 +46,7 @@
 ### Clone repo
 ```
 git clone https://github.com/antonelaparovic/CaldaChallenge.git
-cd CaldaChallenge.git
+cd CaldaChallenge
 ```
 
 
